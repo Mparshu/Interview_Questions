@@ -1,11 +1,11 @@
 1. Write a query to delete duplicate rows from a table.
-'''-- Delete duplicate rows from a table
+```-- Delete duplicate rows from a table
 DELETE FROM table_name
 WHERE rowid NOT IN (
   SELECT MIN(rowid)
   FROM table_name
   GROUP BY column1, column2, ...
-);'''
+);```
 
 2. Write a query to retrieve the names of employees who work in the same department as 'John'.
 -- Retrieve names of employees in the same department as 'John'
