@@ -1,11 +1,11 @@
 1. Write a query to delete duplicate rows from a table.
--- Delete duplicate rows from a table
+'''-- Delete duplicate rows from a table
 DELETE FROM table_name
 WHERE rowid NOT IN (
   SELECT MIN(rowid)
   FROM table_name
   GROUP BY column1, column2, ...
-);
+);'''
 
 2. Write a query to retrieve the names of employees who work in the same department as 'John'.
 -- Retrieve names of employees in the same department as 'John'
@@ -169,7 +169,9 @@ ID GENDER
 4 F
 5 F
 6 F
-ANSUPDATE
+ANS
+'''
+UPDATE
 INPUT_TABLE SET GENDER =
 CASE
 WHEN GENDER = ’M’ THEN ‘F’
@@ -180,4 +182,5 @@ END;
 18. How do you identify the duplicate records? write a query.
 Select empno,count(empno) from emp group by empno
 having count(empno) > 1;
+'''
 
