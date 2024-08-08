@@ -1,30 +1,30 @@
 1. Write a query to delete duplicate rows from a table.
--- Delete duplicate rows from a table
+```-- Delete duplicate rows from a table
 DELETE FROM table_name
 WHERE rowid NOT IN (
   SELECT MIN(rowid)
   FROM table_name
   GROUP BY column1, column2, ...
-);
+);```
 
 2. Write a query to retrieve the names of employees who work in the same department as 'John'.
--- Retrieve names of employees in the same department as 'John'
+```-- Retrieve names of employees in the same department as 'John'
 SELECT name
 FROM employees
 WHERE department = (
   SELECT department
   FROM employees
   WHERE name = 'John'
-);
+);```
 
 3. Write a query to display the second highest salary from the Employee table.
--- Display the second highest salary from the employee table
+```-- Display the second highest salary from the employee table
 SELECT MAX(salary) AS second_highest_salary
 FROM employees
 WHERE salary < (
   SELECT MAX(salary)
   FROM employees
-);
+);```
 
 4. Write a query to find all customers who have made more than Two orders.
 -- Find all customers who have made more than two orders

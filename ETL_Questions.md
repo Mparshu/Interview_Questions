@@ -1,10 +1,12 @@
 1. *What is a Star Schema and how does it differ from a Snowflake Schema?*
 
-A Star Schema is a data warehouse schema that consists of a central fact table surrounded by dimension tables. A Snowflake Schema is a more normalized version of a Star Schema, where each dimension table is further divided into multiple related tables.
+A Star Schema is a data warehouse schema that consists of a central fact table surrounded by dimension tables. 
+A Snowflake Schema is a more normalized version of a Star Schema, where each dimension table is further divided into multiple related tables.
 
 2. *What is the difference between a Fact Table and a Dimension Table?*
 
-A Fact Table stores measurable data, such as sales or revenue, whereas a Dimension Table stores descriptive data, such as date, time, or geography.
+A Fact Table stores measurable data, such as sales or revenue, 
+whereas a Dimension Table stores descriptive data, such as date, time, or geography.
 
 3. *What is Data Aggregation and how is it used in a Data Warehouse?*
 
@@ -41,16 +43,6 @@ A Type 1 SCD overwrites old data with new data, while a Type 2 SCD creates a new
 
 11. **Joins vs. Subqueries:** Know when to use joins and subqueries to design efficient queries, considering data relationships and performance.
 
-1 What is SQL and what are its main features?
-2 Order of writing SQL query?
-3Order of execution of SQL query?
-4 What are some of the most common SQL commands?
-5 What’s a primary key & foreign key?
-6 All types of joins and questions on their outputs?
-7 Explain all window functions and difference between them?
-8 What is stored procedure?
-9 Difference between stored procedure & Functions in SQL?
-10 What is trigger in SQL?
 
 1. What is SQL and what are its main features?
 
@@ -152,8 +144,8 @@ AS
 BEGIN
   SELECT
 
-Q. What are SCD’s ?
-Q. Difference between SCD1, SCD2, SCD3.
+##Q. What are SCD’s ?
+##Q. Difference between SCD1, SCD2, SCD3.
 Ans-----
 A Slowly Changing Dimension (SCD) is a dimension that
 stores and manages both current and historical data over
@@ -166,8 +158,8 @@ SCD1- Overwrite
 SCD2 - Append
 SCD3 - Update
 SCD: Slowly changing dimensions explained with real ex…
-Q. What are Surrogate Keys ?
-Q. Difference between primary key and surrogate key.,"
+##Q. What are Surrogate Keys ?
+##Q. Difference between primary key and surrogate key.,"
 Tech Coach Channel
 Ans------
 Types of Keys in Database |Primary Key |Candidate Key …
@@ -231,18 +223,18 @@ tables are called fact tables.
 Ex- Orders.
 Fact tables are at centre of star or snowflake schema
 surrounded by dimension table.
-Q. What are dimension tables?
-Q. explain your current project architecture?
-Q. difference between delete, truncate and drop?
+##Q. What are dimension tables?
+##Q. explain your current project architecture?
+##Q. difference between delete, truncate and drop?
 Delete vs Truncate vs Drop :Oracle Interview Questions …
-Q. What are the functions you have used?
+##Q. What are the functions you have used?
 ANS: character function
 Aggregate function
 Q difference between Rank and Dense_rank?
-Q. Write a sql query to check duplicates?
+##Q. Write a sql query to check duplicates?
 Use group by command.
 Find and remove duplicate records in a table | delete d…
-Q. What is a lookup transformation?
+##Q. What is a lookup transformation?
 Ans------ Dynamic Lookup
 Dynamic Lookup Transformation in Informatica
 Ans–
@@ -268,23 +260,111 @@ output result.
 Q.What are Joins? What is CROSS
 Join?
 Joins in Oracle (SQL) Explained in detail with practical …
-Q. How will you calculate 2nd Highest Salary?
+##Q. How will you calculate 2nd Highest Salary?
 
 
-6) Source table has 1000 records; only 900 records are
-loaded into the target. What will be your test approach?
-7) What is 'Where Clause', 'Group by Clause’ And 'Having
-Clause’?
-8) How will you test if your source system and target
-systems Different Databases,
-i.e source could be MySQL and target could be Oracle?
-9) How will write a MINUS Query target system other than
-ORACLE?
-10) What is Regression testing?
+To address your queries regarding ETL testing and SQL clauses, here’s a detailed response:
+
+## 1. Test Approach for Missing Records in ETL
+
+When only 900 out of 1000 records are loaded into the target, the testing approach should include:
+
+- **Count Comparison**: First, compare the record counts between the source and target tables. Use a query like `SELECT COUNT(*) FROM source_table` and `SELECT COUNT(*) FROM target_table` to verify the total number of records[1].
+
+- **Data Profiling**: Profile the data in the source to understand the expected values and types. After loading, validate that the data types and values in the target match the source[1].
+
+- **Error Handling**: Implement checks for error and reject handling to capture records that contain invalid values. Use functions like `IS_DATE` or `IS_NUMBER` to validate data formats[1].
+
+- **Detailed Comparison**: For a deeper analysis, perform a row-by-row comparison of key fields between the source and target. This may involve exporting data to a tool like Excel for detailed comparisons if the dataset is large[1].
+
+## 2. SQL Clauses: Where, Group By, and Having
+
+- **Where Clause**: This clause is used to filter records based on specific conditions. For example, `SELECT * FROM table WHERE column = 'value'` retrieves records that meet the condition.
+
+- **Group By Clause**: This clause is used to group rows that have the same values in specified columns into summary rows. For example, `SELECT column, COUNT(*) FROM table GROUP BY column` counts the number of occurrences of each value in the specified column.
+
+- **Having Clause**: This clause is used in conjunction with `GROUP BY` to filter groups based on a specified condition. For example, `SELECT column, COUNT(*) FROM table GROUP BY column HAVING COUNT(*) > 1` retrieves groups that have more than one record[1].
+
+## 3. Testing Different Databases (MySQL to Oracle)
+
+To test data transfer between different database systems like MySQL and Oracle, follow these steps:
+
+- **Data Extraction**: Extract data from the MySQL source using appropriate queries.
+
+- **Data Transformation**: Ensure that any necessary transformations are applied to match the target Oracle database schema.
+
+- **Data Loading**: Load the transformed data into the Oracle database.
+
+- **Validation**: Perform validation checks including:
+  - Record count comparison between MySQL and Oracle.
+  - Data type validation to ensure compatibility.
+  - Data integrity checks to confirm that the data matches in both systems[1][5].
+
+## 4. Writing a MINUS Query in Non-Oracle Systems
+
+In systems other than Oracle, such as SQL Server or MySQL, you can achieve similar functionality to the `MINUS` operator by using the `EXCEPT` operator or a `LEFT JOIN`. For example:
+
+```sql
+SELECT * FROM source_table
+EXCEPT
+SELECT * FROM target_table;
+```
+
+Alternatively, using a `LEFT JOIN`:
+
+```sql
+SELECT s.*
+FROM source_table s
+LEFT JOIN target_table t ON s.id = t.id
+WHERE t.id IS NULL;
+```
+
+This retrieves records present in the source but not in the target[1].
+
+## 5. Regression Testing
+
+Regression testing is a type of software testing that ensures that previously developed and tested software still performs after a change. This includes re-running functional and non-functional tests to confirm that the new code changes have not adversely affected existing features. It is crucial after updates, bug fixes, or enhancements to validate that the software continues to function as intended[1].
+
+
 Company: 2) NESS rechno oeies,
 I) Explain your Project architecture.
-10)Diff bet DELETE and TRUNCATE
-Q. Tell me about yourself.
+Here are the key differences between the SQL DELETE and TRUNCATE commands:
+
+## Definition
+- **DELETE** removes one or more rows from a table based on specified conditions[1][2][3][4][5].
+- **TRUNCATE** removes all rows from a table without using any conditions[1][2][3][4][5].
+
+## Language Type
+- **DELETE** is a DML (Data Manipulation Language) command[1][2][3][4].
+- **TRUNCATE** is a DDL (Data Definition Language) command[1][2][3][4].
+
+## Conditions
+- **DELETE** uses the WHERE clause to specify conditions for deleting rows[1][2][3][4][5]. 
+- **TRUNCATE** does not allow using the WHERE clause[1][2][3][4][5].
+
+## Speed
+- **DELETE** is slower, especially for large tables, as it deletes rows one-by-one[1][3][4].
+- **TRUNCATE** is faster as it removes all rows at once by deallocating data pages[1][2][3][4].
+
+## Transaction Log
+- **DELETE** logs each deleted row in the transaction log[1][2][3][4].
+- **TRUNCATE** only logs the deallocation of data pages in the transaction log[1][2][3][4].
+
+## Rollback
+- **DELETE** allows rollback of deleted data using ROLLBACK before COMMIT[1][3][4].
+- **TRUNCATE** cannot be rolled back after execution[1][2][3][4].
+
+## Identity
+- **DELETE** does not reset the identity column to its seed value[1][2][3].
+- **TRUNCATE** resets the identity column to its seed value[1][2][3].
+
+## Locking
+- **DELETE** acquires locks on each deleted row[1][2][3].
+- **TRUNCATE** acquires table and page locks to remove all rows[1][2][3].
+
+In summary, **TRUNCATE** is faster and uses less transaction log space, but cannot be rolled back. **DELETE** is slower but allows selective deletion of rows and rollback of changes. The choice depends on the specific requirements of the task at hand.
+
+##Q. Tell me about yourself.
 
 4. Explain about your project.
 5. Explain the data flow in your project.
@@ -294,10 +374,10 @@ project?
 8. How do you move a file in Unix?
 9. How do you check for a particular text/line in Unix?
 10. Grep command
-1Q. Create directory
+1##Q. Create directory
 12. How do you find a file from the folder?
 Company: 71 ITC infoTech
-Q. Explain about your project.
+##Q. Explain about your project.
 2. How many fact and dimension tables are there in your
 project. Write the table names.
 DWH Interview Question :Number of fact and Dimensio…
@@ -329,7 +409,7 @@ I. Tell me about yourself
 4. Difference between test plan and test lab
 5. Difference between test case and test strategy
 Company: 4)1MS Health First Round
-Q. Tell me about ur self?
+##Q. Tell me about ur self?
 2. What are ur responsibilities?
 3. What is Tresability Matrix?
 4. Rate ur self in data warehousing, SQL, unix?
@@ -383,7 +463,7 @@ steps)
 9. How do you test transformations?
 10. What is severity and priority (explain with examples) ,-
 Second round:
-Q. He gave me one report format and asked me how do you
+##Q. He gave me one report format and asked me how do you
 test.
 2. Join query
 3. Minus query
@@ -397,21 +477,21 @@ data if u load the data into data warehouse how do u test?
 9. Rownum and rowid concept
 10. Department wise second max salary
 
-Q. Records are updates in source table, Write SQL to
+##Q. Records are updates in source table, Write SQL to
 compare both using source table and target table?
-Q. How can we compare the source file with the target
+##Q. How can we compare the source file with the target
 table?
-Q. What is data warehouse?
+##Q. What is data warehouse?
 Q.Count the number of lines in a file in UNIX.
 ANS: USE WC -L<FILENAME>.
-Q. Compare command in unix, how you compare the files
+##Q. Compare command in unix, how you compare the files
 and what will be the output.
 
-Q. How you design the test cases to test the ETL jobs.
+##Q. How you design the test cases to test the ETL jobs.
 ANS:by referring STM and BRD docs.
-Q. Difference between Union and Union All.
-Q. Difference between Delete, truncate, Drop.
-Q. Difference between view and materialized view.
+##Q. Difference between Union and Union All.
+##Q. Difference between Delete, truncate, Drop.
+##Q. Difference between view and materialized view.
 Ans-
 View Materialized View
 Data will store logically Data will store physically
@@ -432,17 +512,17 @@ We can avoid duplicate rows
 by assigning PK at the time
 of creation.
 Capgemini Interview 29-05-2021
-Q. What are the 3 layers in ETL?
-Q. What is BI(Business Intelligence)?
-Q. What are ETL tools which you worked with?
-Q. What is the difference between DWH and Data Mining?
-Q. What is OLTP and OLAP?
-Q. What is Data Mart and give me example.
+##Q. What are the 3 layers in ETL?
+##Q. What is BI(Business Intelligence)?
+##Q. What are ETL tools which you worked with?
+##Q. What is the difference between DWH and Data Mining?
+##Q. What is OLTP and OLAP?
+##Q. What is Data Mart and give me example.
 Ans-
 Data mart is one which is used to store subject oriented
 data.
 Example: HR data
-Q. What is difference between ETL and Database Testing?
+##Q. What is difference between ETL and Database Testing?
 DATABASE TESTING DWH TESTING
 Smaller in scale Larger in scale
 Usually used to test data at
@@ -454,55 +534,55 @@ Being major one.
 Usually homogeneous 3) heterogeneous data
 Normalized data 4) de-normalized data
 CRUD operation 5) Read only operation
-Q. What are the characteristics of DWH?
+##Q. What are the characteristics of DWH?
 ANS> 1. SUBJECT ORIENTED,
 2. NON-VOLATILE,
 3. TIME - VARIENT,
 4. INTEGRATED
-Q. What are types of DWH systems?
+##Q. What are types of DWH systems?
 ANS >
-Q. What are the possibilities of ETL bugs?
+##Q. What are the possibilities of ETL bugs?
 ANS >
-Duplicate data
-Null data
-Data discrepancy
-Table Structure issues
-Index unable to drop issue
-Data issue in source table
-Index is not created after job run
-Data count mismatch between source and target
-Data not matching between source and target
-Duplicate data loaded issue
-Trim and null issue
-Data precision issue
-Date Format issue
-Business Transformation rules issue
-Performance issue.
-Q. What is ODS?
-ODS database (Operation data Store ), Its properties a…
-ODS: ODS is also a similar small DWH which will help
-analyst to analysis the business. It will have data for less
-number of days. Generally it will be around 30-45 days. Like
-DWH here also surrogate keys will be generated, error and
-reject handling will be done.
-Operational Data store is used by many organizations for
-analysis purpose as well as for data backup and data
-recovery. Data stored in ODS is usually in Normalized form
-as in transactional DBs.
-While in DWH data will be denormalized. ODS is actually a
-replica of Transactional Database, collecting two or more
-Business functions data. Ex ODS may store CRM as well as
-ERP data.
-Q. What is partitioning?
-Q. What is ETL mapping?
+      *Duplicate data
+      *Null data
+      *Data discrepancy
+      *Table Structure issues
+      *Index unable to drop issue
+      *Data issue in source table
+      *Index is not created after job run
+      *Data count mismatch between source and target
+      *Data not matching between source and target
+      *Duplicate data loaded issue
+      *Trim and null issue
+      *Data precision issue
+      *Date Format issue
+      *Business Transformation rules issue
+      *Performance issue.
+##Q. What is ODS?
+      ODS database (Operation data Store ), Its properties a…
+      ODS: ODS is also a similar small DWH which will help
+      analyst to analysis the business. It will have data for less
+      number of days. Generally it will be around 30-45 days. Like
+      DWH here also surrogate keys will be generated, error and
+      reject handling will be done.
+      Operational Data store is used by many organizations for
+      analysis purpose as well as for data backup and data
+      recovery. Data stored in ODS is usually in Normalized form
+      as in transactional DBs.
+      While in DWH data will be denormalized. ODS is actually a
+      replica of Transactional Database, collecting two or more
+      Business functions data. Ex ODS may store CRM as well as
+      ERP data.
+##Q. What is partitioning?
+##Q. What is ETL mapping?
 ANS> It represents data flow from source to target.
-Q. What is a mapplet?
+##Q. What is a mapplet?
 ANS> Maplets creates or configures a set of transformation
 which is reusable.
-Q. What is Data Purging?
+##Q. What is Data Purging?
 ANS> permanently deleting data which is not relevant for
 business purpose from DWH.
-Q. What is Normalization and denormalization?
+##Q. What is Normalization and denormalization?
 What is Normalization in SQL? | Database Normalizatio…
 ANS>
 Normalization : - it is a technique of db design which is
@@ -510,13 +590,13 @@ used to reduce the redundant data or to avoid duplicate
 data.
 De- Normalization : - it is a technique of db design which
 is used to add the duplicate data.
-Q. What is Index and its types?
+##Q. What is Index and its types?
 Index Types
 ANS>
 Index is a pointer which is used to point the data.
 TYPES : B-TREE, BITMAP indexing
-Q. What trigger?
-Q. What are the constraints?
+##Q. What trigger?
+##Q. What are the constraints?
 ANS: It is used to limit the type of data that can go into the
 table.
 Specified while creating the table or after table is created
@@ -526,8 +606,10 @@ UNIQUE
 PRIMARY KEY
 CHECK
 FOREIGN KEY/REFERENCE KEY
-Q. What is Data Integrity?
-Q. What are the advantages of stored procedures?
+##Q. What is Data Integrity?
+##Q. What are the advantages of stored procedures?
+
+
 1) Tell me about yourself .
 2) Roles and responsibilities.
 3) Tell me about your project.
@@ -605,6 +687,8 @@ Select > Distinct>from>where>group by>having>order by.
 Ans- Tidal
 25) What is regression testing?
 26) What is retesting?
+
+
 ACCENTURE L2
 1) Tell me about yourself.
 2) What is star schema?
@@ -674,6 +758,8 @@ character? Give an example.
 Ans— Instr
 
 28) What are the different types of join
+
+
 1) As an ETL tester, what do you think is an most challenging
 aspect when you start testing?
 2) What do you prefer to use, joins or subqueries? Why?
