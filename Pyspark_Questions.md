@@ -193,3 +193,202 @@ result = mapped_rdd.collect()
 In this example, the `filter` and `map` transformations are not executed until the `collect` action is called. PySpark optimizes the execution plan and applies the necessary transformations to produce the final result.
 
 By understanding and leveraging lazy evaluation, you can significantly improve the performance and resource efficiency of your PySpark applications.
+
+
+What are the main advantages of using PySpark over traditional Python for big data processing?
+PySpark, the Python API for Apache Spark, offers several advantages over traditional Python for big data processing. These include:
+
+Scalability for handling massive datasets.
+High performance through parallel processing.
+Fault tolerance for data reliability.
+Integration with other big data tools within the Apache ecosystem.
+How do you create a SparkSession in PySpark? What are its main uses?
+In PySpark, SparkSession is the entry point to using the Spark functionality, and it’s created using the SparkSession.builder API. 
+
+Its main uses include:
+
+Interacting with Spark SQL to process structured data.
+Creating DataFrames.
+Configuring Spark properties.
+Managing SparkContext and SparkSession lifecycle.
+Here it’s an example of how a SparkSession can be created: 
+
+
+from pyspark.sql import SparkSession
+     
+spark = SparkSession.builder \
+         .appName("MySparkApp") \
+         .master("local[*]") \
+         .getOrCreate()	
+Powered By 
+Describe the different ways to read data into PySpark.
+PySpark supports reading data from various sources, such as CSV, Parquet, and JSON, among others. For this aim, it provides different methods, including spark.read.csv(), spark.read.parquet(), spark.read.json(), spark.read.format(), spark.read.load(). 
+
+Here it’s an example of how data can be read into PySpark: 
+
+
+df_from_csv = spark.read.csv("my_file.csv", header=True)
+df_from_parquet = spark.read.parquet("my_file.parquet")
+df_from_json = spark.read.json("my_file.json")
+Powered By 
+How do you handle missing data in PySpark?
+In PySpark, we can handle missing data using several methods:
+
+We can drop rows or columns containing missing values using the method .dropna().
+We can fill missing data with a specific value or use interpolation methods with the method .fillna().
+We can impute missing values using statistical methods, such as mean or median, using Imputer.
+Here it’s an example of how missing data can be handled in PySpark: 
+
+
+# How to drop rows 
+df_from_csv.dropna(how="any")
+
+# How to fill missing values with a constant
+df_from_parquet.fillna(value=2)
+
+# How to impute values with median
+from pyspark.ml.feature import Imputer
+imputer = Imputer(strategy="median", inputCols=["price","rooms"], outputCols=["price_imputed","rooms_imputed"])
+model = imputer.fit(df_from_json)
+df_imputed = model.transform(df_from_json)
+Powered By 
+How can you cache data in PySpark to improve performance?
+One of PySpark's advantages is that it allows us to use the methods .cache() or .persist() to store the data in memory or at the specified storage level. This task improves performance by avoiding repeated computations and reducing the need for data serialization and deserialization. 
+
+Here it’s an example of how to cache data in PySpark: 
+
+
+# How to cache data in memory 
+df_from_csv.cache()
+
+# How to persist data in local disk 
+df_from_csv.persist(storageLevel=StorageLevel.DISK_ONLY)
+Powered By 
+Describe performing joins in PySpark.
+Pyspark allows us to perform several types of joins: inner, outer, left, and right joins. By using the .join() method, we can specify the join condition on the on parameter and the join type using the how parameter, as shown in the example:
+
+
+# How to inner join two datasets
+df_from_csv.join(df_from_json, on="id", how="inner")
+
+# How to outer datasets
+df_from_json.join(df_from_parquet, on="product_id", how="outer")
+Powered By 
+What are the key differences between RDDs, DataFrames, and Datasets in PySpark?
+Spark Resilient Distributed Datasets (RDD), DataFrame, and Datasets are key abstractions in Spark that enable us to work with structured data in a distributed computing environment. Even though they are all ways of representing data, they have key differences:
+
+RDDs are low-level APIs that lack a schema and offer control over the data. They are immutable collections of objects 
+DataFrames are high-level APIs built on top of RDDs optimized for performance but are not safe-type. They organize structured and semi-structured data into named columns.
+Datasets combine the benefits of RDDs and DataFrames. They are high-level APIs that provide safe-type abstraction. They support Python and Scala and provide compile-time type checking while being faster than DataFrames. 
+Explain the concept of lazy evaluation in PySpark. How does it impact performance?
+PySpark implements a strategy called lazy evaluation, where the transformations applied on distributed datasets (RDDs, DataFrames, or Datasets) are not executed immediately. On the contrary, Spark builds a sequence of operations or transformations to be performed on the data called a directed acyclic graph (DAG). This lazy evaluation improves performance and optimizes execution because the computation is deferred until an action is triggered and strictly necessary.
+
+What is the role of partitioning in PySpark? How can it improve performance?
+In PySpark, data partitioning is the key feature that helps us distribute the load evenly across nodes in a cluster. Partitioning refers to the action of dividing data into smaller chunks (partitions) which are processed independently and in parallel across a cluster. It improves performance by enabling parallel processing, reducing data movement, and improving resource utilization. Partitioning can be controlled using methods such as .repartition() and .coalesce().
+
+Explain the concept of broadcast variables in PySpark and provide a use case.
+Broadcast variables are a key feature of Spark distributed computing frameworks. In PySpark, they are read-only shared variables that are cached and distributed to the cluster nodes to avoid shuffle operations. They can be very useful when we have a distributed machine-learning application that needs to use and load a pre-trained model. We broadcast the model as a variable, and that helps us reduce data transfer overhead and improve performance.
+
+Intermediate PySpark Interview Questions
+Having covered the basics, let's move on to some intermediate-level PySpark interview questions that delve deeper into the architecture and execution model of Spark applications.
+
+What is a Spark Driver, and what are its responsibilities?
+The Spark Driver is the core process that orchestrates Spark applications, by executing tasks across the clusters. It communicates with the cluster manager to allocate resources, schedule tasks, and monitor the execution of Spark jobs.
+
+What is Spark DAG?
+A directed acyclic graph (DAG) in Spark is a key concept because it represents the Spark logical execution model. It’s directed because each node represents a transformation executed in a specific order at the edges. It is acyclic because there are no loops or cycles in the execution plan. This plan is optimized using pipeline transformations, task coalescing, and predicate pushdown.
+
+What are the different types of cluster managers available in Spark?
+Spark currently supports different cluster managers for resource management and job scheduling, including:
+
+Standalone, Simple cluster included within Spark.
+Hadoop YARN is a general manager in Hadoop used for job scheduling and resource management.
+Kubernetes is used for automation, deployment, scaling, and managing containerized applications.
+Apache Mesos is a distributed system used for managing resources per application.
+Describe how to implement a custom transformation in PySpark.
+To implement a custom transformation in PySpark, we can define a Python function that operates on PySpark DataFrames and then use the .transform() method to evoke the transformation.
+
+Here it’s an example of how to implement a custom transformation in PySpark: 
+
+
+# Define a python function that operates on pySpark DataFrames
+def get_discounted_price(df):
+    return df.withColumn("discounted_price", \
+                          df.price - (df.price * df.discount) / 100) 
+
+# Evoke the transformation
+df_discounted = df_from_csv.transfrom(get_discounted_price)
+Powered By 
+Explain the concept of window functions in PySpark and provide an example.
+PySpark Window functions allow us to apply operations across a window of rows returning a single value for every input row. We can perform ranking,  analytics, and aggregate functions. 
+
+Here it’s an example of how to apply a window function in PySpark: 
+
+
+from pyspark.sql.window import Window
+from pyspark.sql.functions import row_number
+
+# Define the window function
+window = Window.orderBy("discounted_price")
+
+# Apply window function
+df = df_from_csv.withColumn("row_number", row_number().over(window))
+Powered By 
+How do you handle errors and exceptions in PySpark?
+One of the most useful ways to handle errors and exceptions in PySpark transformations and actions is wrapping up the code in try-except blocks to catch them. In RDDs, we can use foreach operation to iterate over elements and handle exceptions. 
+
+What is the purpose of checkpoints in PySpark?
+In PySpark, checkpointing implies that RDDs are saved to disk so this intermediate point can be referenced in the future instead of recomputing the RDD for the original source. Checkpoints provide a way to recover from failures because the driver is restarted with this previously computed state. 
+
+Advanced PySpark Interview Questions
+For those seeking more senior roles or aiming to demonstrate a deeper understanding of PySpark, let's explore some advanced interview questions that dive into the intricacies of transformations and optimizations within the PySpark ecosystem.
+
+Explain the differences between narrow and wide transformations in PySpark.
+In PySpark, narrow transformations are performed when each input partition contributes to at most one output partition and don’t require shuffling. Examples include map(), filter(), and union. On the contrary, wide transformations are necessary for operations where each input partition may contribute to multiple output partitions and require data shuffling, joins, or aggregations. Examples include groupBy(), join(), and sortBy().
+
+What is a Catalyst optimizer in Spark, and how does it work?
+In Spark, the Catalyst optimizer is a rule-based component of Spark SQL used to optimize query performance. Its main task is to transform and improve the user’s SQL or DataFrame operation to generate an efficient physical execution plan tailored to the specific query and dataset characteristics.
+
+Describe how to implement custom aggregations in PySpark.
+To implement custom aggregations in PySpark, we can use the groupBy() and agg() methods together. Inside the call to agg(), we can pass several functions from the pyspark.sql.functions module. Also, we can apply Pandas custom aggregations to groups within a PySpark DataFrame using the .applyInPandas() method.
+
+Here it’s an example of how to implement custom aggregations in PySpark: 
+
+
+# Use groupBy and agg with Functions
+from pyspark.sql import functions as F
+df_from_csv.groupBy("house_id").agg(F.mean("price_discounted"))
+
+# Use applyInPandas
+def normalize_price(df):
+    disc_price = df["discounted_price"]
+    df["normalized_price"] = disc_price.mean() / disc_price.std()
+
+df_from_csv.groupBy("house_id").applyInPandas(normalize_price)
+Powered By 
+What challenges have you faced when working with large datasets in PySpark? How did you overcome them?
+With this question, we can relate to our own experience and tell a particular case in which encountered challenges with PySpark and large datasets that can include some of the following:
+
+Memory management and resource utilization.
+Data skewness and uneven workload distribution.
+Performance optimization, especially for wide transformations and shuffles.
+Debugging and troubleshooting complex job failures.
+Efficient data partitioning and storage.
+To overcome these issues, PySpark provides partitioning of the dataset, caching intermediate results, using built-in optimization techniques, robust cluster management, and leveraging fault tolerance mechanisms.
+
+How do you integrate PySpark with other tools and technologies in the big data ecosystem?
+PySpark has strong integration with various big data tools, including Hadoop, Hive, Kafka, and HBase, as well as cloud-based storage such as AWS S3, and Google Cloud Storage. This integration is performed using built-in connectors, libraries, and APIs provided by PySpark.
+
+What are some best practices for testing and debugging PySpark applications?
+Some best practices recommended for testing and debugging PySpark Apps include:
+
+Writing unit tests using pyspark.sql.test.SQLTestUtils together with Python libraries (pytest)
+Debugging apps and logging messages using the library logging as well as the Spark UI
+Optimizing performance using the Spark APIs org.apache.spark.metrics and performance monitoring tools.
+How would you handle data security and privacy concerns in a PySpark environment?
+Sharing data has become easier today, so protecting sensitive and confidential information is a good way to avoid data leaks. One of the best practices we can follow is to apply data encryption during processing and storage.
+
+In PySpark, we can achieve that by using the aes_encrypt() and aes_decrypt() functions to columns in a DataFrame. We can also use another library, such as the cryptography library, to achieve this goal.
+
+Describe how to use PySpark to build and deploy a machine learning model.
+PySpark provides us with the library MLIib, a scalable machine learning library for building and deploying machine learning models on large datasets. This library API can be used for several tasks in the ML process, such as data preprocessing, feature engineering, model training, evaluation, and deployment. Using the Spark clusters, we can deploy PySpark-based ML models in production using batch or streaming inference. 

@@ -1,3 +1,137 @@
+## Hexaware Interview Question which I was not able to answer
+
+### Sample Data
+Assuming you have a table named `employees` with the following data:
+
+| deptno | empname |
+|--------|---------|
+| 10     | arun    |
+| 20     | rajesh  |
+| 10     | siva    |
+
+### Expected Output
+The output will look like this:
+
+| deptno | empnames        |
+|--------|------------------|
+| 10     | arun,siva       |
+| 20     | rajesh          |
+
+In Oracle, you can use the `LISTAGG` function to achieve similar functionality to MySQL's `GROUP_CONCAT`. This function allows you to concatenate values from multiple rows into a single string based on a specified grouping.
+
+### Example of Using LISTAGG
+
+Here’s how you can write a query using `LISTAGG` to concatenate employee names by their department number:
+
+```sql
+SELECT deptno, 
+       LISTAGG(empname, ',') WITHIN GROUP (ORDER BY empname) AS empnames
+FROM employees
+GROUP BY deptno;
+```
+
+### Explanation
+- **SELECT Statement**: This selects the department number (`deptno`) and concatenates employee names (`empname`).
+- **LISTAGG Function**: 
+  - `LISTAGG(empname, ',')` specifies that the employee names should be concatenated with a comma as the separator.
+  - `WITHIN GROUP (ORDER BY empname)` orders the names alphabetically before concatenation.
+- **GROUP BY Clause**: This groups the results by `deptno`, so each department number corresponds to a single row in the output with concatenated employee names.
+
+This approach effectively groups and concatenates employee names by their department number in Oracle.
+
+### Sample Data
+Assuming the `transactions` table contains the following data:
+
+| balance |
+|---------|
+| 2000    |
+| 200     |
+| 100     |
+| 400     |
+
+### Expected Output
+The output will look like this:
+
+| balance | line_total |
+|---------|------------|
+| 2000    | 2000       |
+| 200     | 2200       |
+| 100     | 2300       |
+| 400     | 2700       |
+
+To achieve the desired output where you have a running total (line total) based on a list of balances, you can use the `SUM` function with the `OVER` clause in Oracle. This allows you to calculate a cumulative sum of the balances.
+
+### SQL Query to Calculate Running Total
+
+Assuming you have a table named `transactions` with a column named `balance`, here’s how you can write the SQL query:
+
+```sql
+SELECT balance,
+       SUM(balance) OVER (ORDER BY ROWNUM) AS line_total
+FROM transactions;
+```
+
+### Explanation
+- **SELECT Statement**: This selects the `balance` from the `transactions` table.
+- **SUM Function**: The `SUM(balance) OVER (ORDER BY ROWNUM)` calculates the cumulative sum of the `balance` column.
+  - `ORDER BY ROWNUM` ensures that the rows are processed in the order they are retrieved, which is crucial for calculating a running total.
+- **Result**: The query will return each balance along with its corresponding cumulative total.
+
+### Note
+- Ensure that the `transactions` table contains the data as specified. If the table structure is different or if you are using a different source for the balances, you may need to adjust the query accordingly.
+- The `ROWNUM` function is used here to maintain the order of the input data. If you have a specific column to order by, you can replace `ROWNUM` with that column name.
+
+
+
+### Sample Data
+
+Assuming the `requests` table contains the following data:
+
+| req_no |
+|--------|
+| 6754   |
+| mano   |
+| 8976   |
+| teja   |
+
+### Expected Output
+
+The output will look like this:
+
+| req_no | output |
+|--------|--------|
+| 6754   | fizz   |
+| mano   | buzz   |
+| 8976   | fizz   |
+| teja   | buzz   |
+
+To achieve the desired output where you check if the input is a number or a string and return "fizz" for numbers and "buzz" for strings, you can use the `CASE` statement in Oracle SQL. 
+
+### SQL Query
+
+Assuming you have a table named `requests` with a column named `req_no`, here’s how you can write the SQL query:
+
+```sql
+SELECT req_no,
+       CASE 
+           WHEN REGEXP_LIKE(req_no, '^[0-9]+$') THEN 'fizz'
+           WHEN REGEXP_LIKE(req_no, '^[A-Za-z]+$') THEN 'buzz'
+           ELSE 'unknown' -- Optional: Handle other cases if needed
+       END AS output
+FROM requests;
+```
+
+### Explanation
+- **SELECT Statement**: This selects the `req_no` from the `requests` table.
+- **CASE Statement**: 
+  - `REGEXP_LIKE(req_no, '^[0-9]+$')` checks if `req_no` consists entirely of digits. If true, it returns "fizz".
+  - `REGEXP_LIKE(req_no, '^[A-Za-z]+$')` checks if `req_no` consists entirely of letters. If true, it returns "buzz".
+  - The `ELSE 'unknown'` clause is optional and can be used to handle cases where `req_no` contains mixed types or special characters.
+- **Output**: The query will return the `req_no` along with "fizz" or "buzz" based on the type of input.
+
+This query effectively distinguishes between numeric and string inputs, returning the appropriate labels as specified. Adjust the table name and column name as necessary based on your actual database schema.
+
+
 1. Write a query to delete duplicate rows from a table.
 ```-- Delete duplicate rows from a table
 DELETE FROM table_name
@@ -5,33 +139,39 @@ WHERE rowid NOT IN (
   SELECT MIN(rowid)
   FROM table_name
   GROUP BY column1, column2, ...
-);```
+);
+```
 
 2. Write a query to retrieve the names of employees who work in the same department as 'John'.
-```-- Retrieve names of employees in the same department as 'John'
+```
+-- Retrieve names of employees in the same department as 'John'
 SELECT name
 FROM employees
 WHERE department = (
   SELECT department
   FROM employees
   WHERE name = 'John'
-);```
+);
+```
 
 3. Write a query to display the second highest salary from the Employee table.
-```-- Display the second highest salary from the employee table
+```
+-- Display the second highest salary from the employee table
 SELECT MAX(salary) AS second_highest_salary
 FROM employees
 WHERE salary < (
   SELECT MAX(salary)
   FROM employees
-);```
+);
+```
 
 4. Write a query to find all customers who have made more than Two orders.
--- Find all customers who have made more than two orders
+```-- Find all customers who have made more than two orders
 SELECT customer_id, COUNT(order_id) AS num_orders
 FROM orders
 GROUP BY customer_id
 HAVING COUNT(order_id) > 2;
+```
 
 5. Write a query to count the number of orders placed by each customer.
 -- Count the number of orders placed by each customer
@@ -280,6 +420,7 @@ select empno from
 highest_sal from emp)
 where highest_sal =&n;
 
+
 23) Let us consider your mail id. The output should be only
 gmail.com.
 WAQ.
@@ -390,8 +531,9 @@ Remove Junk Data in
 Aus@tr#al&ia —---> Australia
 Select 3 from Dual Where 3 not in (1,2, Null);
 What is the output?
-Write a query to get name from email Id
+Write a sql query to get name from email Id
 Aishwarya12@gmail.com—-------> Aishwarya12
+
 
 WAQ to get employeename, Avg age,their city.
 WAQ to get employee where age is > 30.

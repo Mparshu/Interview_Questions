@@ -1,3 +1,55 @@
+### Lead or Lag
+In SQL, **LEAD** and **LAG** are window functions that allow you to access data from subsequent or preceding rows in the result set without the need for a self-join. 
+
+- **LEAD**: This function returns the value of a specified column from a subsequent row in the result set. For example, `LEAD(salary, 1) OVER (ORDER BY hire_date)` retrieves the salary of the next employee based on the hire date.
+
+- **LAG**: Conversely, this function returns the value of a specified column from a preceding row. For instance, `LAG(salary, 1) OVER (ORDER BY hire_date)` retrieves the salary of the previous employee.
+
+### Star Schema vs. Snowflake Schema
+Both star and snowflake schemas are used in data warehousing to organize data efficiently, but they differ in structure and complexity.
+
+#### Star Schema
+- **Structure**: Contains a central fact table connected to multiple dimension tables.
+- **Normalization**: Dimension tables are denormalized, which can lead to redundancy.
+- **Query Performance**: Generally faster for queries due to fewer joins.
+- **Design Complexity**: Simpler to design and understand.
+- **Storage**: May require more storage space due to redundancy.
+
+#### Snowflake Schema
+- **Structure**: Contains a central fact table connected to dimension tables, which may be further normalized into sub-dimension tables.
+- **Normalization**: Dimension tables are normalized, reducing redundancy.
+- **Query Performance**: May be slower for queries due to more complex joins.
+- **Design Complexity**: More complex to design and maintain.
+- **Storage**: More efficient in terms of storage space due to normalization.
+
+### Fact vs. Dimension
+- **Fact Table**: Contains quantitative data for analysis, such as sales amounts or transaction counts. It typically has foreign keys linking to dimension tables.
+- **Dimension Table**: Contains descriptive attributes related to the facts, such as product details, customer information, or time periods.
+
+### Differences Between Fact and Dimension
+- **Content**: Fact tables store numerical data, while dimension tables store descriptive attributes.
+- **Granularity**: Fact tables are often at a lower level of granularity, while dimension tables provide context to the facts.
+- **Relationships**: Fact tables are linked to dimension tables through foreign keys, allowing for complex queries and analyses.
+
+### WITH Clause
+The **WITH** clause, also known as Common Table Expressions (CTEs), allows you to define temporary result sets that can be referenced within a SELECT, INSERT, UPDATE, or DELETE statement. This improves readability and organization of complex queries.
+
+#### Example Usage
+```sql
+WITH SalesCTE AS (
+    SELECT product_id, SUM(sales_amount) AS total_sales
+    FROM sales
+    GROUP BY product_id
+)
+SELECT p.product_name, s.total_sales
+FROM products p
+JOIN SalesCTE s ON p.product_id = s.product_id;
+```
+In this example, `SalesCTE` aggregates sales data, which is then joined with the `products` table to retrieve product names alongside their total sales. 
+
+These concepts are fundamental in SQL for data analysis and structuring data efficiently in data warehouses.
+
+
 1. *What is a Star Schema and how does it differ from a Snowflake Schema?*
 
 A Star Schema is a data warehouse schema that consists of a central fact table surrounded by dimension tables. 
@@ -1275,6 +1327,8 @@ Data precision issues
 Data format issue
 Business transformation rules issue
 Performance issue.
+
+
 Tech Mahindra:
 30/08/2021
 1. What is your skill area,what is the core area having
@@ -1310,6 +1364,8 @@ you performance testing done by you? or any other guy?
 things right what are the process usually followed?
 19. For example in one of column in the table is null, if you
 pass it as 'Blank' value what will happen?
+
+
 Iqvia Interview Questions
 Round 1
 Tell me about yourself.
@@ -1318,14 +1374,18 @@ Duplicate query
 Delete Duplicate Record
 Dense Rankl
 
-Unix Command to move a file from one source to another
-source.
+Q. Unix Command to move a file from one source to another source.
+
 Get the employee and their manager name from emp table.
+
 How many log files are there in Informatica?
+
 Validation that you performed.
+
 WAQ to get the following output.
 Source Target
 20210608 —--> 2021–06-08
+
 Active and Passive Tranformation.
 
 ROUND 2
@@ -1349,6 +1409,7 @@ from a left join b
 on a.id=b.id;
 17.
 Tell me about yourself.
+
 Types of DCL and TCL commands
 Ans— DCL (Data Control Language) —--> Commit,
 Rollback,savepoint
