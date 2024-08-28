@@ -150,7 +150,7 @@ LEFT JOIN: returns all records from the left table and matching records from the
 RIGHT JOIN: returns all records from the right table and matching records from the left table.
 FULL OUTER JOIN: returns all records from both tables, with null values in the columns where there are no matches.
 7. Explain all window functions and difference between them?
-
+011-40849270
 Window functions perform calculations across a set of rows that are related to the current row. Common window functions include:
 
 ROW_NUMBER(): assigns a unique number to each row within a partition.

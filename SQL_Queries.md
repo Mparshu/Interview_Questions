@@ -1,3 +1,222 @@
+Given the two tables with a single column each as follows:
+
+- **table1**: `column_1` [1, 1, 1, 2, 3, 4, NULL]
+- **table2**: `column_1` [1, 2, 3, NULL]
+
+Let's perform the various types of joins and show the results.
+
+### Inner Join
+
+An inner join returns only the matching records from both tables based on the join condition.
+
+```sql
+SELECT *
+FROM table1
+INNER JOIN table2
+ON table1.column_1 = table2.column_1;
+```
+
+**Result:**
+```
+column_1 | column_1
+---------------------
+1        | 1
+1        | 1
+1        | 1
+2        | 2
+3        | 3
+```
+
+### Left Outer Join
+
+A left outer join returns all records from the left table (table1) and the matched records from the right table (table2). If there is no match, it fills the result with null values.
+
+```sql
+SELECT *
+FROM table1
+LEFT OUTER JOIN table2
+ON table1.column_1 = table2.column_1;
+```
+
+**Result:**
+```
+column_1 | column_1
+---------------------
+1        | 1
+1        | 1
+1        | 1
+2        | 2
+3        | 3
+4        | NULL
+NULL     | NULL
+```
+
+### Right Outer Join
+
+A right outer join returns all records from the right table (table2) and the matched records from the left table (table1). If there is no match, it fills the result with null values.
+
+```sql
+SELECT *
+FROM table1
+RIGHT OUTER JOIN table2
+ON table1.column_1 = table2.column_1;
+```
+
+**Result:**
+```
+column_1 | column_1
+---------------------
+1        | 1
+1        | 1
+1        | 1
+2        | 2
+3        | 3
+NULL     | NULL
+```
+
+### Full Outer Join
+
+A full outer join returns all records from both tables. If there is no match, it fills the result with null values.
+
+```sql
+SELECT *
+FROM table1
+FULL OUTER JOIN table2
+ON table1.column_1 = table2.column_1;
+```
+
+**Result:**
+```
+column_1 | column_1
+---------------------
+1        | 1
+1        | 1
+1        | 1
+2        | 2
+3        | 3
+4        | NULL
+NULL     | NULL
+```
+
+### Summary of Results
+
+- **Inner Join**: Only matching records from both tables.
+- **Left Outer Join**: All records from `table1` with matching records from `table2`.
+- **Right Outer Join**: All records from `table2` with matching records from `table1`.
+- **Full Outer Join**: All records from both tables, with matches where available.
+
+These results illustrate how each type of join affects the output based on the provided data in the two tables.
+
+To display duplicate records in SQL, you can use various methods. Here are four distinct approaches:
+
+## 1. Using `GROUP BY` and `HAVING`
+
+This method groups records based on specific columns and counts occurrences, filtering for those greater than one.
+
+```sql
+SELECT column1, column2, COUNT(*)
+FROM table_name
+GROUP BY column1, column2
+HAVING COUNT(*) > 1;
+```
+
+This query will return combinations of `column1` and `column2` that appear more than once in the table, indicating duplicates[2][5].
+
+## 2. Using `ROW_NUMBER()`
+
+The `ROW_NUMBER()` function assigns a unique sequential integer to rows within a partition of a result set. You can use it to identify duplicates.
+
+```sql
+WITH RankedRecords AS (
+    SELECT *,
+           ROW_NUMBER() OVER (PARTITION BY column1, column2 ORDER BY (SELECT NULL)) AS rn
+    FROM table_name
+)
+SELECT *
+FROM RankedRecords
+WHERE rn > 1;
+```
+
+This query partitions the data by the specified columns and selects rows where the row number is greater than one, effectively retrieving duplicates[3][4].
+
+## 3. Using a Self Join
+
+Another approach is to join the table with itself based on the columns that should be unique. This method retrieves all records that have duplicates.
+
+```sql
+SELECT a.*
+FROM table_name a
+JOIN table_name b ON a.column1 = b.column1 AND a.column2 = b.column2
+WHERE a.id <> b.id;
+```
+
+This query selects all columns from `table_name` where there are matching records in another instance of the same table, ensuring they are not the same row[2][3].
+
+## 4. Using `DISTINCT` with `COUNT`
+
+You can also combine `DISTINCT` and `COUNT` to find duplicates in a single column.
+
+```sql
+SELECT DISTINCT column1
+FROM table_name
+GROUP BY column1
+HAVING COUNT(column1) > 1;
+```
+
+This query retrieves distinct values from `column1` that appear more than once, indicating duplicates[3][5].
+
+Each of these methods can be adapted based on the specific requirements of your database schema and the nature of the data you are working with.
+
+Display Duplicate Records:
+Select empno,count(*) from emp group by empno having count(*) > 1;
+
+select * from emp where rowid not in (select min(rowid) from emp group by empno)
+
+select * from emp e1 where rowid > (select min(rowid) from emp e2 where e1.empno=e2.empno)
+
+select * from dummy2 where id in(select id from dummy2 group by id having count(*>1);
+
+
+Delete Duplicate Records:
+delete from emp a where rowid > (select min(rowid) from emp b where a.empno=b.empno)
+
+delete from empdup a whete exists (select empid from empdup b where a.empid=b.empid and a.rowid>b.rowid)
+
+Q. Select top 4th Salary.
+
+SELECT Salary 
+FROM (
+    SELECT Salary, DENSE_RANK() OVER (ORDER BY Salary DESC) AS rank 
+    FROM Employee
+) AS ranked 
+WHERE rank = 4;
+
+select * from emp a where 3=(select count(b.sal) from emp b where a.sal<b.sal)
+
+Q.Display top two salaries in each department;
+
+SELECT deptno, sal
+FROM (
+    SELECT emp.*, 
+           DENSE_RANK() OVER (PARTITION BY deptno ORDER BY sal DESC) AS high_sal
+    FROM emp
+) ranked
+WHERE high_sal <= 2;
+
+Q. Find each department wise sum of salaries:
+select deptno,sum(sal) from emp group by deptno;
+
+
+Table: C1
+      ABC
+Output should be A
+                 B
+                 C
+write a sql query.
+
+select substr(ename,level,1) from (select 'ABC' as ename from dual) connect by level<= length(ename);
+
+
 ## Hexaware Interview Question which I was not able to answer
 
 ### Sample Data
