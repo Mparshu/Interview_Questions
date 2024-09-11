@@ -392,3 +392,50 @@ In PySpark, we can achieve that by using the aes_encrypt() and aes_decrypt() fun
 
 Describe how to use PySpark to build and deploy a machine learning model.
 PySpark provides us with the library MLIib, a scalable machine learning library for building and deploying machine learning models on large datasets. This library API can be used for several tasks in the ML process, such as data preprocessing, feature engineering, model training, evaluation, and deployment. Using the Spark clusters, we can deploy PySpark-based ML models in production using batch or streaming inference. 
+
+
+Delloite Interview Questions:
+Technical Questions
+How do you deploy PySpark applications in a production environment?
+What are some best practices for monitoring and logging PySpark jobs?
+How do you manage resources and scheduling in a PySpark application?
+Write a PySpark job to perform a specific data processing task (e.g., filtering data, aggregating results).
+You have a dataset containing user activity logs with missing values and inconsistent data types. Describe how you would clean and standardize this dataset using PySpark.
+Given a dataset with nested JSON structures, how would you flatten it into a tabular format using PySpark?
+Your PySpark job is running slower than expected due to data skew. Explain how you would identify and address this issue.
+You need to join two large datasets, but the join operation is causing out-of-memory errors. What strategies would you use to optimize this join?
+Describe how you would set up a real-time data pipeline using PySpark and Kafka to process streaming data.
+You are tasked with processing real-time sensor data to detect anomalies. Explain the steps you would take to implement this using PySpark.
+Describe how you would design and implement an ETL pipeline in PySpark to extract data from an RDBMS, transform it, and load it into a data warehouse.
+Given a requirement to process and transform data from multiple sources (e.g., CSV, JSON, and Parquet files), how would you handle this in a PySpark job?
+You need to integrate data from an external API into your PySpark pipeline. Explain how you would achieve this.
+Describe how you would use PySpark to join data from a Hive table and a Kafka stream.
+Experience and Conceptual Understanding
+Can you provide an overview of your experience working with PySpark and big data processing?
+What motivated you to specialize in PySpark, and how have you applied it in your previous roles?
+Explain the basic architecture of PySpark.
+How does PySpark relate to Apache Spark, and what advantages does it offer in distributed data processing?
+Describe the difference between a DataFrame and an RDD in PySpark.
+Can you explain transformations and actions in PySpark DataFrames?
+Provide examples of PySpark DataFrame operations you frequently use.
+How do you optimize the performance of PySpark jobs?
+Can you discuss techniques for handling skewed data in PySpark?
+Explain how data serialization works in PySpark.
+Discuss the significance of choosing the right compression codec for your PySpark applications.
+How do you deal with missing or null values in PySpark DataFrames?
+Are there any specific strategies or functions you prefer for handling missing data?
+Describe your experience with PySpark SQL.
+How do you execute SQL queries on PySpark DataFrames?
+What is broadcasting, and how is it useful in PySpark?
+Provide an example scenario where broadcasting can significantly improve performance.
+Discuss your experience with PySpark's MLlib.
+Can you give examples of machine learning algorithms you've implemented using PySpark?
+How do you monitor and troubleshoot PySpark jobs?
+Describe the importance of logging in PySpark applications.
+Have you integrated PySpark with other big data technologies or databases? If so, please provide examples.
+How do you handle data transfer between PySpark and external systems?
+Explain the project that you worked on in your previous organizations.
+Describe a challenging PySpark project you've worked on. What were the key challenges, and how did you overcome them?
+Explain your experience with cluster management in PySpark.
+How do you scale PySpark applications in a cluster environment?
+Can you name and briefly describe some popular libraries or tools in the PySpark ecosystem, apart from the core PySpark functionality?

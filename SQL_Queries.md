@@ -1,7 +1,7 @@
-Given the two tables with a single column each as follows:
+Given the updated tables with the following data:
 
 - **table1**: `column_1` [1, 1, 1, 2, 3, 4, NULL]
-- **table2**: `column_1` [1, 2, 3, NULL]
+- **table2**: `column_1` [1, 2, 3, NULL, NULL]
 
 Let's perform the various types of joins and show the results.
 
@@ -29,7 +29,7 @@ column_1 | column_1
 
 ### Left Outer Join
 
-A left outer join returns all records from the left table (table1) and the matched records from the right table (table2). If there is no match, it fills the result with null values.
+A left outer join returns all records from the left table (`table1`) and the matched records from the right table (`table2`). If there is no match, it fills the result with null values.
 
 ```sql
 SELECT *
@@ -53,7 +53,7 @@ NULL     | NULL
 
 ### Right Outer Join
 
-A right outer join returns all records from the right table (table2) and the matched records from the left table (table1). If there is no match, it fills the result with null values.
+A right outer join returns all records from the right table (`table2`) and the matched records from the left table (`table1`). If there is no match, it fills the result with null values.
 
 ```sql
 SELECT *
@@ -71,6 +71,7 @@ column_1 | column_1
 1        | 1
 2        | 2
 3        | 3
+NULL     | NULL
 NULL     | NULL
 ```
 
@@ -96,16 +97,19 @@ column_1 | column_1
 3        | 3
 4        | NULL
 NULL     | NULL
+NULL     | NULL
 ```
 
 ### Summary of Results
 
-- **Inner Join**: Only matching records from both tables.
-- **Left Outer Join**: All records from `table1` with matching records from `table2`.
-- **Right Outer Join**: All records from `table2` with matching records from `table1`.
-- **Full Outer Join**: All records from both tables, with matches where available.
+- **Inner Join**: Returns only the matching records from both tables.
+- **Left Outer Join**: Returns all records from `table1` with matching records from `table2`, filling with NULL where there is no match.
+- **Right Outer Join**: Returns all records from `table2` with matching records from `table1`, filling with NULL where there is no match.
+- **Full Outer Join**: Returns all records from both tables, filling with NULL where there is no match.
 
 These results illustrate how each type of join affects the output based on the provided data in the two tables.
+
+### DUPLICATE RECORDS
 
 To display duplicate records in SQL, you can use various methods. Here are four distinct approaches:
 
