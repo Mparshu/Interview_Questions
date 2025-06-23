@@ -1,0 +1,1041 @@
+Window handling code
+
+
+
+
+
+========================================================
+
+
+METHOD WHICH Will revert the value string ans int 
+3) implicit and explicit wait with code
+4) how will you find the unknown element of the table using other values:-
+5) takescreenshot code 
+4) binding something in sellenium  -- using PageFactory.initElements we initializes all the webelements
+5) super keyword in java -- refers to parent class 
+
+6) If you have 10 links on webpage you need to open it without using .click command how will you use it.---
+----> 	
+		
+		List<WebElement> links=driver.findElements(By.tagName("a")); 
+		JavaScriptExecutor js =new (JavaScriptExecutor)driver;
+		
+		for(WebElement link:links){
+		
+		    String url = link.getAttribute("href");
+			
+        js.executeScript("window.open(arguments[0])", url);
+)
+		
+		}
+		
+
+7) Action and select class code. -- Actions action =new action(driver);
+8) window handling code in sellenium ---- 
+
+Set<> allWindows=driver.getWindowHandles();
+	for(window:allWindows){
+	
+	}
+
+
+
+1) prime number logic proggrame
+2) Webdriver architecture,chromedriver is a class or interface,
+3) final and finally keyword and its implimentation ---
+4) diff wait and its implementation end to end
+5) One java method for amazone which will return the value depending on search keyword and count:- 
+
+
+6) what are Diff exceptions in java and how do you handle it -------
+
+1) difference between list and set -------------
+2) give me the total list of letters in the given string  ="Aditya" (Hashmap)
+3) Types of interfaces and how do we achieve---functional, Nested etc
+4) difference between abstraction and interface  --- Abstraction is achieved  by interface , 100 % is by interface , otherwise we also can use abstract method.
+
+How do we enabled the hidden checkbox in sellenium:- 
+By using javascript executor .
+WebElement checkbox=driver.findElement(By.xpath("xpath"));
+
+JavaScriptExecutor js = (JavaSriptExecutor)driver;
+
+js.ExecuteScript("argument[0].click",checkbox);
+
+
+
+Infy
+
+ 1)amazone find x-path
+//span[text()='Health, Family & Personal Development']
+ 2)Find the highest number from 
+ 
+ int array ={1,3,5,7,9,8}  --
+ 
+ int max=array[0]
+ 
+ for (int i=1;i<array.lentgh();i++){
+ 
+ if (array[i]>max) 
+ {
+max=array[i];
+ }
+ 			 System.out.println("array max no is "+   max);
+
+ }
+ 
+ 3) Add the numbers from array ={1,3,5,7,9,8} ----
+ 
+		int array []={1,3,8};
+			 
+			 int sum=0;
+			 
+			 for (int i=0;i<array.length;i++){
+			 
+				 sum+=array[i];
+						 }
+			 System.out.println("sum is "+   sum);
+	}
+ 
+ 
+ 4) Count the character from String without using .length()/predefine method --------String f="Elephant" 
+ 5) Remove the duplicate character from string / or write only one different characters from string which 
+	String =str"Eellepphaant"-----
+	
+	str=str.toLowerCase();
+	
+	HashSet<> set=new HashSet();
+	StringBuilder sb=new Stringbuilder();
+	
+	for(char c:str.toCharArray()){
+	
+	if(!set.contains(c)){
+	
+	set.add(c);
+	sb.append();
+	
+	}
+	System.out.println(sb.toString());
+	}
+	
+	
+	
+	
+ 6)how to switch from one window to another.----
+ 
+ driver.switchTo().newWindow();
+  driver.switchTo().window(String windowHandle);
+  
+
+ 
+ 
+7) Framework Structure...
+
+
+==========Coforge===============
+
+1) diff waits code -  
+
+
+WebDriver driver =new ChromeDriver();
+driver.manage().window().maximize();
+driver.manage().
+
+
+
+2) store data in hashmap and print its
+3) collection
+
+4) How to send auth token to API
+.auth().basic("username","pass")
+5) Diff error codes in API Testing, 503, 403---
+
+200 OK
+201 resourcecreated
+400 Bad Request	
+401 Unauthorized	
+404 Not Found	
+403 Forbidden	
+429 Too many request
+
+500 Internal Server Error
+503 Service Unavailable	
+
+
+6) Cockies and headers how to store in restassured --- 
+in given() section();
+
+
+==================================
+
+
+
+
+
+
+
+
+
+
+
+========== Capge 2==========================
+Find the count of each word from the entire string
+Count char in string ---- 
+String sentense="Aditya is a good guy, Aditya is a naugty guy @#$%^&** 7&5 888 6899t6 ";
+sentense=sentense
+
+
+
+================Quorum and freyer =============
+
+difference between get and navigate---
+navigate() also supports:
+
+.back() â€“ Go back to the previous page
+
+.forward() â€“ Go forward
+
+.refresh() â€“ Refresh the page
+
+
+
+
+====================General Imp Questions======================
+Coding â€“ Count element frequencies using HashMap.
+
+int arr[]={1,3,5,7,3,9,3};
+int count=0;
+Map<Integer,Integer>totalCount=new HashMap();
+
+for(int c:arr){
+totalCount.put(c,getOrDefault(c,0)+1);
+}
+
+
+
+To insert the key value in hashmap and get all the values
+
+HashMap<String, String> values = new HashMap<>();
+        values.put("Aditya", "Aditya");
+
+HashMap<String, String> values = new HashMap<>();
+        values.put("Aditya", "Aditya");
+
+// Using Map.Entry to iterate over key-value pairs
+for (Map.Entry<String, String> entry : values.entrySet()) {
+    System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
+}
+
+=============================================================================
+
+QUORUM L2------
+
+
+1) WebDriver Why it is interface not a abstract class?
+WebDriver is an interface to support multiple browser drivers like ChromeDriver, FirefoxDriver, etc.
+Interfaces allow loose coupling and flexibility in implementing different browsers without modifying existing code.
+Java doesnâ€™t support multiple inheritance with classes, but interfaces can be used this way
+
+WebDriver driver = new ChromeDriver(); // Loose coupling
+Code depends on WebDriver (interface), not ChromeDriver directly.
+
+Later you can switch to FirefoxDriver without changing logic.
+
+
+2) How to handle Popups--
+Alert alert = driver.switchTo().alert();
+Alert is an interface in Selenium that handles JavaScript alert boxes.
+
+
+3) responsive Layout,---ðŸ“± --use to test different browser capabilities and different screensize
+
+Responsive Testing = Testing layout + functionality across multiple screen sizes (device resolutions)   --- (like phones, tablets, desktops). using the ChromeOption class LIKE ecognito, hiding all popupse by sending disabled notifications 
+
+4. Different types of framework and its implementation
+:---
+Modular Framework â€“ Split test cases into reusable methods.
+
+Data-Driven â€“ Reads data from Excel, CSV, etc.
+(Uses Apache POI, JSON, etc.)
+
+Keyword-Driven â€“ Uses keywords in Excel to drive actions.
+
+Hybrid â€“ Combination of Data + Keyword + Modular.
+
+BDD Framework â€“ Uses Gherkin language (Cucumber + Selenium).
+
+
+5. If i have 3 webelement dynamic
+-----
+List<WebElement> elements = driver.findElements(By.xpath("//div[@class='example']"));
+WebElement secondElement = elements.get(1); // Index starts at 0
+
+6. what is fluent wait and when do we use it :- Use when element load time is unpredictable.
+
+Wait<WebDriver> wait = new FluentWait<>(driver)
+   .withTimeout(Duration.ofSeconds(30))
+   .pollingEvery(Duration.ofSeconds(5))
+   .ignoring(NoSuchElementException.class);--You can ignore any runtime exception that may 		during polling.
+   
+wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("someId")));
+
+7. Browser capabilities:- Set browser-specific settings using  / Responsive Layout
+ChromeOptions options = new ChromeOptions();
+options.addArguments("--incognito");
+
+8. Keyword driven framework--  You just need to add different keywords for different actions and locators as well in the excel and its value what you want to pass into that fields
+
+
+9. Action class how do we use
+Actions actions=new Actions();
+actions.moveToElement(element).click().build().perform();
+
+
+10. Disadvantages of sellenium :-
+No Support for Dekstop App
+No built-in reporting (use ExtentReports/TestNG
+Cant handle captcha
+Requires external libraries for Excel, PDF, DB, etc.
+
+11. Chromedriver, EdgeDriver are classess in sellenium ?---Yes
+
+12. tale element exception how do you handle it and other this kind of basic exceptions while testing,
+and how to handle those exceptions--   It Came when the webElement is removed from the DOM
+
+Generic try catch block 
+
+13. diff exceptions in sellenium 
+
+--StaleElementReferenceException
+
+TimeoutException
+ElementNotInteractableException
+ElementClickInterceptedException
+InvalidSelectorException
+WebDriverException
+NoSuchWindowException
+NoSuchFrameException
+NoSuchElementException
+UnexpectedAlertPresentException
+
+
+)problems:- 
+
+int[] arr = {1, 3, 5, 7, 9, 8};
+int max = arr[0];
+for (int num : arr) {
+    if (num > max) max = num;
+}
+System.out.println("Max: " + max);
+
+18)  Count character
+String str = "Aditya";
+Map<Character, Integer> map = new HashMap<>();
+
+for (char c : str.toCharArray()) {
+    map.put(c, map.getOrDefault(c, 0) + 1);
+}
+System.out.println(map);
+
+
+
+âœ… 19. Find Highest Number in Array
+
+for each loop
+int[] arr = {1, 3, 5, 7, 9, 8};
+int max = arr[0];
+for (int num : arr) {
+    if (num > max) max = num;
+}
+System.out.println("Max: " + max);
+
+for loop
+
+int max = arr[0];
+for(int i=0;i<=arr.length();i++){
+	
+	if(arr[i]>max){
+	
+	max=arr[i];
+	
+	}
+
+
+}
+System.out.println(max);
+
+
+
+âœ… 20. Add All Numbers from Array
+
+int sum = 0;
+for (int num : arr) {
+    sum += num;
+}
+System.out.println("Sum: " + sum);
+
+âœ… 21. Count Characters Without Using .length();
+
+String s = "Elephant";
+int count = 0;
+for (char c : s.toCharArray()) count++;
+System.out.println("Length: " + count);
+
+
+âœ… 22. Remove Duplicate Characters from String
+
+String input = "Eellepphaant";
+Set<Character> seen = new LinkedHashSet<>();
+for (char c : input.toCharArray()) seen.add(c);
+for (char c : seen) System.out.print(c); // Output: Elephant
+
+This scheduler is flag-based, controlled via the AutoFailedDlrScheduler
+property in the configuration file. It runs only if this flag is set to 1
+
+
+===========================QUESTIONS  MANAGERIAL / CTOS  =================================
+
+1)Points to consider for effort estimations:-
+
+Effort estimation in automation depends on the scope (number and type of test cases â€“ UI/API), application complexity (dynamic elements, iframes, third-party integrations), and framework availability. I also consider tool expertise, environment readiness, test data needs, script maintenance, integration with CI/CD tools, review/debug time, and add a 20â€“25% buffer for unexpected issues.
+
+2) In Sellenium how do we add listner --- [Using ITestListener lisner interface]
+
+public class TestListener implements ITestListener {
+    @Override
+    public void onTestFailure(ITestResult result) {
+        System.out.println("Test Failed: " + result.getName());
+        // You can add screenshot capture logic here
+    }
+
+3) What is and how to handled flacky test - flaky test is a test that sometimes passes and sometimes fails
+Sync issues ---	Use Explicit Waits (WebDriverWait, ExpectedConditions)
+Dynamic locators	 ---Use robust XPath/CSS with stable attributes
+Pop-ups, alerts, or unexpected modals
+browser lag
+
+4) Use Healenium:- 
+automatically fixes broken or outdated locators at runtime and keeps your test execution stable even if UI elements change slightly
+
+5) 
+
+
+=========================  JAVA  ====================================
+
++----------------+------------------+--------------------+---------------------------+------------------------------+
+| Access Modifier | Within the Class | Within the Package | Outside the Package       | Outside the Pkg (Child Class)|
++----------------+------------------+--------------------+---------------------------+------------------------------+
+| private         | YES              | NO                 | NO                        | NO                           |
+| default         | YES              | YES                | NO                        | NO                           |
+| protected       | YES              | YES                | NO                        | YES                          |
+| public          | YES              | YES                | YES                       | YES                          |
++----------------+------------------+--------------------+---------------------------+------------------------------+
+
+NOTES:-
+- If you want to access the non static member from the non static componant we can access in all three ways, But we are going for only first ways.
+- If  you want to access the non static member from the static member we have to go for only object creation.
+
+FINAL:- It is a keyword or modifier which can be used with the class or variable or method, if we are making final we can re-access the var but we cant reinitialize it, for class we wont inherit the class, for method cant be overridden , if we will do will get compile time error.
+Finally    :-  Used with try-catch to execute code always, whether an exception is thrown or not.
+Finalize  :-  Garbage collector, for cleaning purpose we were using it.
+
+super keyword in Java is used to refer to the immediate parent class
+
+If you want to allow object creation without passing values, you need to explicitly define a default constructor:
+
+2. Abstract Class :- 
+
+- A class that can have abstract methods (or not).
+- You cannot create an object of an abstract class.
+- It can have:
+	- Abstract methods
+	- Concrete (normal) methods
+	- Constructors
+	- Instance variables
+Purpose :- An abstract class is a class that cannot be instantiated and is meant to be inherited by other classes. It is used to:---- cannot create object.
+You can instantiate a subclass that extends the abstract class:
+Abstract method, Class , interface.
+
+
+3) PRINCIPLE OF OOPS:- 
+Object-oriented programming has the following principles:-
+- Encapsulation :-The principle of binding state(attributes/fields/var) and behaviour (methods) together is known as Encapsulation. We use getter and setter method for this.
+- Inheritance: Used to achieve the properties and behaviors of another class, Achieved by: extends (for classes) / implements (for interfaces) in Java.
+- Polymorphism : -  Performing a single action in different ways, [Method ] overloading, overriding
+- Abst0raction :-Hiding internal details and showing only the necessary functionality [ interface] 
+
+Types of inheritance :- 
+Single Inheritance:- A class inherits from one parent class.
+Multilevel Inheritance :--  A class inherits from a class, which itself inherits from another class.
+Hierarchical Inheritance:- Multiple classes inherit from the same parent class.
+
+4) RelationShip
+Is-a relationship   --- Parent child and by usng implement /inheritance/interface , loose coupling
+
+Has-a relationship:-
+If one object is dependent on another object is known as has-a relationship
+1)aggregation -- Not completely dependant. one class object used in another can work without it.
+2)composition -- completely dependant struct -- object of  a class
+
+5) Exceptions Handling (Try -catch)
+ throw:
+   âœ… Works with both checked and unchecked exceptions
+	- Used to explicitly throw an exception (custom or built-in).
+ throws:
+   âœ… Mostly used for checked exceptions
+	- Used in method signatures to declare that a method might throw an exception.
+
+6) Collections:- 
+
+ðŸ”¹ List â€“ Ordered, allows duplicates
+ArrayList: Fast random access, slow mid-insert/delete
+LinkedList: Fast insert/delete, slow access
+Vector
+
+ðŸ”¹ Set â€“ Unique elements only (no duplicates)
+HashSet: Unordered, fast via hashing
+LinkedHashSet: Maintains insertion order
+TreeSet: Sorted (natural or custom order)
+
+ðŸ” Reverse: new TreeSet<>(Comparator.reverseOrder())
+
+ðŸ”¹ Map â€“ Key-value pairs (keys unique, values can repeat)
+HashMap: Unordered, fast lookups
+LinkedHashMap: Maintains key insertion order
+TreeMap: Sorted by keys
+
+7) Types of interfaces :- Functional Interface(Has exactly one abstract method), Nested Interface, 
+							Marker Interface, Normal Interface, Hybrid Interface
+							
+							
+8) File I/O in Java :-  
+
+BufferedReader br = new BufferedReader(new FileReader("file.txt"));
+
+9) POM and PageFactory
+
+public class LoginPage {
+    WebDriver driver;
+
+    // Initialize PageFactory elements
+    public LoginPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this); // ðŸ”¥ This initializes the @FindBy elements
+    }
+
+    @FindBy(id = "username")
+    WebElement txtUsername;
+
+    @FindBy(id = "password")
+    WebElement txtPassword;
+
+    @FindBy(id = "loginBtn")
+    WebElement btnLogin;
+
+    // Page Actions
+    public void login(String user, String pass) {
+        txtUsername.sendKeys(user);
+        txtPassword.sendKeys(pass);
+        btnLogin.click();
+    }
+}
+
+10)  For loggers we need to add dependency in the pom and log4j property inside resource with details in it.
+
+static Logger log = Logger.getLogger(LoginTest.class);
+
+11) String Buffer VS String Builder :- 
+
+StringBuffer:
+Use if you need a mutable string in a multithreaded environment and you expect concurrent modifications.
+
+StringBuilder:
+Prefer when thread safety is not a concern (e.g., within a single method or thread) for better performance.
+
+
+Feature          | StringBuffer                         | StringBuilder
+-----------------|--------------------------------------|--------------------------------------
+Introduced in    | Javaâ€¯1.0                              | Javaâ€¯5
+Synchronization  | Synchronized (threadâ€‘safe)           | Not synchronized (not threadâ€‘safe)
+Performance      | Slower (due to synchronization)      | Faster (no synchronization overhead)
+Use case         | When multiple threads access and modify the same buffer | When used in a singleâ€‘threaded context
+
+
+// Using StringBuffer (thread-safe)
+StringBuffer buf = new StringBuffer("Hello");
+buf.append(" World");
+System.out.println(buf); // Hello World
+
+// Using StringBuilder (faster)
+StringBuilder sb = new StringBuilder("Foo");
+sb.append("Bar");
+System.out.println(sb); // FooBar
+
+
+NOTES:- 
+Complete design/ concrete class  = class
+Incomplete design = interface
+We can achieve multiple inheritance by interface.--- 
+public class C implements A, B {
+								}
+
+we have extend and impliments keywords,
+
+If any class is there separately then its parent class is Object which is in lang package.
+Its an super most parent-class of all the classes in JAVA.
+get class, toString etc methods are there in the object class.
+
+Private members (like variables and methods) are not inherited by child classes, but they can still be accessed via public/protected getters or setters.
+Constructors are not inherited by subclasses.
+A constructor is always non-static, because it is tied to the creation of an object.
+You cannot create an object of a constructor â€” instead, you use a constructor to create an object.
+You create an object by calling a constructor using the new keyword, like:
+MyClass obj = new MyClass();
+We can use access modifiers (public, protected, default, private) for constructors to control object creation and accessibility.
+
+Constructor does not have return type to it, if you add it will become method if u add.
+@override is an optional in method overriding concept, but recommended.
+
+We have 2 diff constructor such as constructor with default access modifier and default const (Which we do not create in the class)
+
+Encapsulation:-
+```
+class Person {
+    private String name;  // private field (data hiding)
+    // Getter
+    public String getName() {
+        return name;
+    }
+    // Setter
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+public class TestEncapsulation {
+    public static void main(String[] args) {
+        Person p = new Person();
+        p.setName("John");                // Setting value via setter
+        System.out.println(p.getName());  // Getting value via getter
+    }
+}
+```
+
+Interface /Abstraction :- 
+```
+interface Animal {
+    void sound();
+}
+class Dog implements Animal {
+    public void sound() {
+        System.out.println("Bark");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Animal a = new Dog();  // âœ… Valid: Dog implements Animal
+        a.sound();             // Output: Bark
+    }
+}
+```
+Abstraction By Abstract class:-
+```
+abstract class Animal {
+    abstract void sound();     // Abstract method
+    void eat() {               // Concrete method
+        System.out.println("Animal eats food");
+    }
+}
+class Dog extends Animal {
+    void sound() {
+        System.out.println("Dog barks");
+    }
+}
+```
+Inheritance :- 
+```
+class Animal {
+    void eat() {
+        System.out.println("Animal eats food");
+    }
+}
+class Dog extends Animal {
+    void bark() {
+        System.out.println("Dog barks");
+    }
+}
+public class TestInheritance {
+    public static void main(String[] args) {
+        Dog d = new Dog();
+        d.eat();   // âœ… Inherited from Animal
+        d.bark();  // âœ… From Dog class
+    }
+}
+
+Polymorphism:-
+overloading
+
+class Calculator {
+    int add(int a, int b) {
+        return a + b;
+    }
+    double add(double a, double b) {
+        return a + b;
+    }
+}
+public class TestOverloading {
+    public static void main(String[] args) {
+        Calculator c = new Calculator();
+        System.out.println(c.add(5, 3));        // Output: 8
+        System.out.println(c.add(5.2, 3.3));    // Output: 8.5
+    }
+}
+```
+overriding
+class Animal {
+```
+    void sound() {
+        System.out.println("Some generic sound");
+    }
+}
+class Cat extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Meow");
+    }
+}
+public class TestOverriding {
+    public static void main(String[] args) {
+        Animal a = new Cat();  // Upcasting
+        a.sound();             // Output: Meow (Cat's implementation)
+    }
+}
+
+==========================   SELLENIUM  ============================
+Shorts for Sellenium
+
+THEORY:- 
+
+1) Architecture :-
+ChromeDriver â†’ extends RemoteWebDriver
+RemoteWebDriver â†’ implements WebDriver interface
+WebDriver â†’ extends SearchContext
+
+
+Methods in WebDriers:- 
+1. get(String url)
+2. getTitle()
+3. getCurrentUrl()
+4. getPageSource()
+5. close()
+6. quit()
+7. navigate().to(String url)
+8. navigate().back()
+9. navigate().forward()
+10. navigate().refresh()
+11. findElement(By locator)
+12. findElements(By locator)
+13. manage().window().maximize()
+14. manage().timeouts().implicitlyWait()
+15. switchTo().alert()
+16. switchTo().frame()
+17. switchTo().window()
+18. getWindowHandle()
+19. getWindowHandles()
+
+
+
+2) LOCATORS:- 
+
+1. tagName() :-
+2. id():- 
+3. name():- 
+4. className()
+5. linkText()
+6. partialLinkText() :-
+7. cssSelector(): -  tagname[AttributeName='Attribute value']
+8. xpath() -          1) Absolute X-path
+	           	      2) Relative x-path :-   
+
+Absolute X-path:- This will travel start to end./html/body/input/a/b -----() 
+
+Relative x-Path:-  This will directly jump from one web element to another directly.
+i) X-path by Attribute:-                       //tagname[@AttributeName='Attribute Value'] (@ and // is extra thancss)
+ii) X-path by text:-                            //tagname[text()='Complete Visible text']
+iii) X-path by contains attribute:-    //tagname[contains@attribute,'partial attribute value'] ----here only quamma is der
+iv) X-path by contains text 
+  (PartialVisibleText):-                        //tagName[contains(text(),'partial visible text')]            ----diff is , only.             
+v) X-path by Mulitiple attribute:-     //tagname[@Attribute1='Attribute value1' and                                                                                            @Attruibute2='Attribute value1']
+
+X-path By Axes:- 
+
+1. ancestor :-                 //tagname[(child)/ancestor::tagname(parent)]
+2. descendant:-             //tagname[(parent)/decendant::tagname(child)]
+3. following-sibling :-    //tagname[sibling1]/following-sibling::tagname[sibling2]
+4. preceeding-sibling    //tagname[sibling2]/preceding-sibling::tagname[sibling1]
+
+Waits:- 
+WebDriver driver =new Chromedriver();
+
+driver.manage().window().maximize();
+
+3) implicitly wait- 
+driver.manage().timeout.implicitlyWait(Duratioon.OfSeconds(20));
+
+4) Explicitly wait- 
+WebDriverWait wait= new WebDriverWait(driver,Duration.OfSeconds(20));
+wait.until(ExpectedCondition.VisibilityOfElementLocated(By.Xpath("")));
+
+5) Fluent wait:- When load time is not sure and also wants to skip any specific exception.:-
+
+FluentWait<WebDriver> wait=new FluentWait<>(driver);
+				.withTimeout(Duration.OfSeconds);
+				.PollingEvery(Duration.OfSeconds);
+				.ignoring(NoSuchElmentException);
+				
+6) TakeScrenshot :- 
+TakeScrinshot ts=new (TakeScrinshot)driver;
+File src=ts.getScreenshotAs(OutputType.File);
+File dst=new File("pathtofile/file.png");
+
+FileUtils.copyFile(src, dst);
+
+for specific webelement screenshot :- 
+File src=element.getScreenshotAs(OutputType.File); ------------No need to create TakeScreenshot object 
+				
+7) DropDowns  --  We use select class for this 
+
+Select s =new Select(dropdown);
+s.SelectByindex();
+s.SelectByValue();
+s.SelectByVisibleText();
+s.getFirstSelectedOption ()---
+ first.getText());
+
+for selectAllSelected Options:-  
+List<WebElement> allSelected = s.getAllSelectedOptions();
+getWrappedElement ()----No need of loop it wraps all the elements as a single unit.
+
+8) Mouse Actions :-- Using Actions class
+
+Actions action= new Action(driver);
+1. action.moveToElement(element)
+2. action.contextClick(WE) or contextCick()
+3. action.doubleClick(element) or doubleClick(WE)
+4. dragAndDrop(WebElementSource, WebElementTarget) 
+5. clickAndHold(element)
+6. release()
+7. perform() -----MANDATORY 
+
+9) Keyword Actions:- 
+
+1. Keys Enum :- driver.findelement(By.name("username")).sendKeys("Admin",Keys.TAB,"admin123",Keys.TAB,Keys.Enter);
+
+2. Robot class:- non static methods in this class :-
+													Robot robot=new Robot();	
+													 1) robot.keyPress(KeyEvent.VK_TAB);
+					-                                2) robot.keyRelease(KeyEvent.VK_TAB);
+
+
+10) JavaScriptExecutor:-  scrolling actions,disabled webElement, handled hidden web-element  
+
+	JavaScriptExecutor js=(JavaScriptExecutor)driver;
+	This is explicit typecasting
+	
+js.executeScript("window.scrollBy(0, 500)");
+	
+11) Window Handling
+String parent=driver.getWindowHandle();
+
+Set<String> allwindows=driver.getWindowHandles();
+
+for(String window:allWindows){
+if(!window.equals(parent)){
+driver.switchTo().window(window);
+if(driver.getTitle().equals("This is the title of this window")){
+
+Syso("This is the expected window");
+break;
+}
+}
+}
+driver.switchTo().window(parent);
+
+
+12) Popups:- Using Alert interface
+
+Alert alert = driver.switchTo().alert();
+alert.accept();         // Click OK
+alert.dismiss();        // Click Cancel
+String text = alert.getText();  // Get alert message
+alert.sendKeys("text"); // For prompt alerts
+
+// 1. Hidden Division Popups
+driver.findElement(By.id("popupDiv")).click(); // Interact like a normal element
+
+//2. File Upload Popups
+
+// i) Using sendKeys()
+driver.findElement(By.id("fileInput")).sendKeys("C:\\Path\\To\\File.xlsx");
+
+13) iFrames:-  using switchTo
+driver.switchTo().frame("frameNameOrId");
+driver.switchTo().parentFrame();
+
+// âœ… Open a new blank tab in the browser
+driver.switchTo().newWindow(WindowType.TAB);
+
+// âœ… Open a new browser window
+driver.switchTo().newWindow(WindowType.WINDOW);
+
+14) TestNG ANNOTATIONS:-
+
+Priority
+dataProvider
+alwaysRun
+dependsOnGroups
+priority
+enabled
+dependsOnMethods :- If the dependent method fails, the method depending on it will be skipped, not failed.
+groups
+timeOut
+	Configuration Annotation in TestNG:- 
+@BeforeSuite---To connect with server
+@BeforeTest---To connect database
+@BeforeClass --to launch browser
+@BeforeMethod -
+
+15) Taking data from Excel File:- using Apache POI for Exce
+
+FileIputStream fis = new FileIputStream(Filepath/file.xlsx);
+XSSFWorkbook workbook= new XSSFWorkbook(fis); 
+XSSFSheet sheet =workbook.getSheet(0);
+Strig value= sheet.getRow(0).getCell(0).getStringCellValue();
+
+Notes:- i) ITEstListener we do use for taking screenshot while failyng any test case:
+
+16) Types Of Frameworks:- 
+Data Driven Framework
+Keyword Driven Framework----> Test steps are in Excel as keywords: click, type, openBrowser, etc.
+Modular Driveen Framework--Code is broken into reusable modules (like Login, Register, Search).
+Method Driven Framework ---> simmilar to keyword drivvern, All kewords are mapped with method
+Tetsng
+Hybrid Framework ---->   Combines Data + Keyword  + Modular (Different testScripts,login,logout, pom pags etc)+ TestNG. ()+
+
+======================API AUTOMATIONS======================================
+
+i) Request Specification (Setup Phase)
+
+given()-----
+.header("Authorization", "Bearer token") | For authentication or custom headers   |OR
+.auth().basic("username","Passwords")
+  
+.contentType("application/json") | To specify request payload format  
+.accept("application/json") | To specify expected response type  
+.body("{ \"name\": \"John\" }") | For POST/PUT request payloads  
+.pathParam("id", 123) | Inject dynamic values into the URL path  
+.queryParam("page", 1) | Send query params for pagination/filtering  
+.multiPart("file", new File("path/to/file")) | For file upload (multipart/form-data)  
+.cookie("sessionid", "abc123") | For session-based tracking  
+.headers(Map<String, String>) | Pass multiple headers at once  
+.log().all() | Logs full request for debugging  
+
+when() ----
+.get("/api/users") | To fetch data  
+.post("/api/users") | To create new resource  
+.put("/api/users/1") | To update existing resource  
+.delete("/api/users/1") | To delete a resource  
+.patch("/api/users/1") | For partial update  
+
+then()
+.statusCode(200) | Assert expected status code  
+.body("name", equalTo("John")) | Validate response body field  
+.header("Content-Type", "application/json") | Validate response headers  
+.time(lessThan(2000L)) | Validate response time is within SLA  
+.statusLine("HTTP/1.1 200 OK") | Validate full status line  
+.body("data.size()", equalTo(5)) | Validate size of list in response  
+.log().all() | Log complete response  
+.extract().response() | Capture response object for later use  
+
+2) Creating Different Post request
+
+i) using Hashmap:-  		HashMap<> map=nw HashMap<>();
+ii)org.json:-       		JSONObject obj=new JSONObject();  & JSONArray tag1 =new JSONArray();     | 							.body(data.toString()) 
+iii)pojo class:- 			using constructor and getter setter 	 
+iv)external json file:-			
+external json file:-
+JSONObject data =new JSONObject(new JSONTokener(New FileReader("Data.xlsx")));
+
+3) Asserting the json response 
+        Assert.assertEquals(res.getStatusCode(), 200);
+        Assert.assertEquals(res.contentType(), "application/json");
+        
+        // Extract specific title and validate (Example check)
+        String titles = res.jsonPath().get("[0].enterprise.organization.departments[1].teams[0].experts[0].name").toString();
+        Assert.assertEquals(titles, "Dr. Alice Brown");
+
+4) Asserting xml response :- 
+
+//	  String id=res.xmlPath().get("Company.Departments.department[0].Teams.Team[0].id").toString();
+//	  Assert.assertEquals(id, "P001");
+
+5) File Upload 
+
+		File myfile1=new File("C:\\Users\\aditya.mungse\\Downloads\\application_properties.txt");
+		.body("myfile1",equalTo("application_properties.txt"))
+
+6) JSON and XML Schema validator :-
+
+JSON:- .then() 
+	   .body(matchesJsonSchemaInClasspath("schema.json"))
+	   
+Xml Schema validation:- 
+It is not suported in RestAssured, It has to be done with Xml-Unit library\
+
+POINTERS:- 
+To run our test scripts remotely using jenkings, we need to use maven surefire plugin and maven compiler plugin in pom.xml 	   
+
+=============================== Managerial Round questions /CTO round          =============================
+
+============================
+
+Self-healing locators
+Katalon
+Selenium + Healenium
+Healenium integrates with Selenium to detect broken locators
+
+Other than work i have learn- -----
+
+Initially Kafka Was thinking to implement  ()--   cluster based
+Nats Architecture (More Faster than Kafka) --  cli , Streams ,Producer, Consumer
+Jmeter ....
+
+
+
+===============================
+
+
+Initialize repo---------	git init
+Clone repo-------------	
+Stage file------------	git add .
+Commit--------------	git commit -m "msg"
+Push to branch------	git push origin main
+Switch branch-------	git checkout dev
+
+git status                      --Staged and unstaged files in that branch 
+git reset filename`             --will unstaged specific file to if added by mistake and 
+git add *.ext                    --- to add specific extention
+
+git push origine branchname ----[to push the code ]
+
+git clone <url>   -----clone the repo
+git origine -v      ---To check origine repos is mapped or not with local machine 
+git pull B/or source branch name ---if your in branch A and wanted the changes of branch B in your branch A then 
+git branch -d branchname         ---To delete any branch [This will only work in case if your not in the branch you wants to delete]
+
+
+
+git push origine main
+
+
+
+git merge BranchB ---This will merge Branch B into your current branch (A)
